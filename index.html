@@ -1,0 +1,84 @@
+<html>
+<head>
+    <style>
+    body {
+    font-family: sans-serif;
+    background: white;
+    font-size: 2.5rem;
+    color: #333;
+    }
+
+    .greeting {
+    font-weight: 600;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    }
+
+    #jam {
+    font-weight: 600;
+    position: absolute;
+    left: 70%;
+    top: 45%;
+    transform: translate(-50%, -50%);
+    }
+    </style>
+</head>
+<body onload="startTime()">
+    <div id="jam"></div>
+    <div class="greeting"></div>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+    <script type="text/javascript">
+    function startTime() {
+        var today = new Date();
+        var h = today.getHours();
+        var m = today.getMinutes();
+        var s = today.getSeconds();
+        m = checkTime(m);
+        s = checkTime(s);
+        document.getElementById('jam').innerHTML =
+        h + ":" + m + ":" + s;
+        var t = setTimeout(startTime, 500);
+    }
+    function checkTime(i) {
+        if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
+        return i;
+    }
+    var thehours = new Date().getHours();
+	var themessage;
+	var morning = ('Good morning, Sonia');
+	var afternoon = ('Good afternoon, Sonia');
+	var evening = ('Good evening, Sonia');
+
+	if (thehours >= 0 && thehours < 12) {
+		themessage = morning; 
+        $('body').mousemove(function(e){
+        $(this).css('background-image', "url('bck.jpg')");
+        });
+
+	} else if (thehours >= 12 && thehours < 17) {
+		themessage = afternoon;
+        $('body').mousemove(function(e){
+        $(this).css('background-image', "url('bck1.jpg')");
+        });
+
+	} else if (thehours >= 17 && thehours < 24) {
+		themessage = evening;
+        $('body').mousemove(function(e){
+        $(this).css('background-image', "url('bck2.jpg')");
+        });
+	}
+
+	$('.greeting').append(themessage);
+
+    $('body').mousemove(function(e){
+    var amountMovedX = (e.pageX * -1 / 6);
+    var amountMovedY = (e.pageY * -1 / 6);
+    $(this).css('background-position', amountMovedX + 'px ' + amountMovedY + 'px');
+    });
+
+    
+    </script>
+</body>
+</html>
